@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class statistics implements Comparable<statistics>{
 
 	static boolean printLong = false;
@@ -53,7 +55,8 @@ public class statistics implements Comparable<statistics>{
 	}
 	
 	//Parses fullPlay and calls the corresponding methods to update stats
-	public void updateStats(String fullPlay){
+	//Returns runs scored on the play
+	public int update_stats(String fullPlay){
 		//Splitting up fullPlay
 		int slash = fullPlay.indexOf("/");
 		int period = fullPlay.indexOf(".");
@@ -76,16 +79,23 @@ public class statistics implements Comparable<statistics>{
 		String [] mods = mod.split("/");
 		
 		
-		//Calls parsePlay(), if no runners advance, sac bunt or fly do not count
+		//Calls parse_play(), if no runners advance, sac bunt or fly do not count
 		//So mods is not needed
+		int homer = 0;
 		if(advance.equals(""))
-			parsePlay(play, new String[0]);
+			homer = parse_play(play, new String[0]);
 		else
-			parsePlay(play, mods);
+			homer = parse_play(play, mods);
+		
+		int rs =  runs_scored(advances) + homer;
+		//if(rs > 0)
+			//System.out.println(fullPlay + " \n" + rs + "\n");
+		return rs;
 	}
 	
 	//Parses the play and decides if it was hit single...
-	public void parsePlay(String play, String [] mods){
+	private int parse_play(String play, String [] mods){
+		int homer = 0;
 		if(stringEquals("SB DI", play)){
 			//Stolen base: attempted to throw out or no attempt
 		} else if(stringEquals("POCS PO", play)){
@@ -121,7 +131,7 @@ public class statistics implements Comparable<statistics>{
 			pa++; walks++;
 		} else if(stringEquals("H HR", play)){
 			//Homer
-			ab++; pa++; hits++; homeruns++;
+			ab++; pa++; hits++; homeruns++;  homer++;
 		} else if(stringEquals("FC", play)){
 			//Fielders choice
 			ab++; pa++;
@@ -150,9 +160,26 @@ public class statistics implements Comparable<statistics>{
 		
 		//Additional play, Recursive call
 		if(play.indexOf('+') < 3 && play.indexOf('+') > 0){
-			updateStats(play.substring(play.indexOf('+') + 1));
+			update_stats(play.substring(play.indexOf('+') + 1));
 		}
+		return homer;
 		
+	}
+	
+	private int runs_scored(String [] advances){
+
+		int count = 0;
+		for(String x : advances){
+			if(x.contains("-H"))
+				count++;
+//			if(x.matches("/-[23]"))//[(]*[0123456789]E/")){
+//				System.out.println("RAN");
+//				count++;
+//			}
+		}
+		//if(count > 0)
+			//System.out.println(count + " " + Arrays.toString(advances));
+		return count;
 	}
 	
 	public String getBA(){
@@ -169,6 +196,17 @@ public class statistics implements Comparable<statistics>{
 		return ret.substring(1, 5);
 	}
 	
+	public void add_player_stats(player p){
+		hits += p.stats.hits;
+		singles += p.stats.singles;
+		doubles += p.stats.doubles;
+		triples += p.stats.triples;
+		homeruns += p.stats.homeruns;
+		pa += p.stats.pa;
+		walks += p.stats.walks;
+		sac += p.stats.sac;
+		ab += p.stats.ab;
+	}
 	
 	public String toString(){
 		if(printLong){

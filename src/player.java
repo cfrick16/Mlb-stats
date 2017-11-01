@@ -1,17 +1,15 @@
 
 public class player implements Comparable<player>{
 	private String playerName;
-	private team myTeam;
 	static boolean printLong = false;
 	public statistics stats; 
 	boolean doPrint;
 	
 	
-	public player(String pName, team t){
+	public player(String pName){
+		stats = new statistics();
 		playerName = pName.substring(1, pName.length() - 1);
 		doPrint = false;
-		stats = new statistics();
-		myTeam = t;
 	}
 	
 	public player(String pName, boolean b){
@@ -24,8 +22,8 @@ public class player implements Comparable<player>{
 		return stats.ab > 0;
 	}
 	
-	public void updateStats(String play){
-		stats.updateStats(play);
+	public int update_stats(String play){
+		return stats.update_stats(play);
 	}
 	public String getName(){
 		return playerName;

@@ -3,15 +3,20 @@ import java.util.*;
 import java.util.*;
 import java.util.Map.Entry;
 public class stats {
+	
+	public static Map<String, player> allPlayers = new HashMap<String, player>();
+	public static Map<String, team> allTeams = new HashMap<String, team>();
+	
 	public static void main(String [] args) throws FileNotFoundException{
-		String year = "2014";
-		File [] files ={new File(year + "ANA.EVA"), new File(year + "ARI.EVN"),
+		boolean oneOnly = false;
+		String year = "2016";
+		File [] files ={new File(year + "CIN.EVN"), new File(year + "ARI.EVN"),
 				new File(year + "BAL.EVA"), new File(year + "ATL.EVN"),
-				new File(year + "BOS.EVA"), new File(year + "CHN.EVN"),
-				new File(year + "CHA.EVA"), new File(year + "CIN.EVN"),
+				new File(year + "BOS.EVA"), new File(year + "HOU.EVA"),
+				new File(year + "CHA.EVA"), new File(year + "CHN.EVN"),
 				new File(year + "CLE.EVA"), new File(year + "COL.EVN"),
 				new File(year + "DET.EVA"), new File(year + "LAN.EVN"),
-				new File(year + "HOU.EVA"), new File(year + "MIA.EVN"),
+				new File(year + "ANA.EVA"), new File(year + "MIA.EVN"),
 				new File(year + "KCA.EVA"), new File(year + "MIL.EVN"),
 				new File(year + "MIN.EVA"), new File(year + "NYN.EVN"),
 				new File(year + "NYA.EVA"), new File(year + "PHI.EVN"),
@@ -26,69 +31,41 @@ public class stats {
 				
 		
 		};
-		Map<String, player> players = new HashMap<String, player>();
-		Map<String, team> teams = new HashMap<String, team>();
+
 		String home = null;
 		String away = null;
+		ArrayList<Game> games = new ArrayList<Game>();
 		for(File file : files){
 			Scanner input = new Scanner(file);
-			
+
+			String ln = input.nextLine();
+			String gmCode = "";
 			while(input.hasNextLine()){
-				String ln = input.nextLine();
-				//String lnType = ln.substring(0, ln.indexOf(','));
-				String [] data = ln.split(",");
-				
-				if(data[0].equals("id")){
-					
-				} else if(data[0].equals("version")){
-					
-				} else if(data[0].equals("info")){
-					if(data[1].equals("visteam")){
-						away = data[2];
-						if(teams.containsKey(data[2]))
-							teams.get(away);
-						else{
-							teams.put(away, new team(away));
-						}
-					}
-					if(data[1].equals("hometeam")){
-						home = data[2];
-						if(teams.containsKey(data[2]))
-							teams.get(home);
-						else{
-							teams.put(home, new team(home));
-						}
-					}
-						
-				} else if(data[0].equals("start") || data[0].equals("sub")){
-					if(!players.containsKey(data[1])){
-						team myTeam = teams.get(away);
-						if(data[3].equals("1"))
-							myTeam = teams.get(home);
-						players.put(data[1], new player(data[2],myTeam));
-					}
-					
-				} else if(data[0].equals("play")){
-					//if(data[2].equals("1"))
-						players.get(data[3]).updateStats(data[6]);
-						
-						if(data[2].equals("1"))
-							teams.get(home).updateStats(data[6]);
-						else
-							teams.get(away).updateStats(data[6]);
+				ln = input.nextLine();
+				while(input.hasNextLine() && !ln.substring(0,2).equals("id")){
+					ln = input.nextLine() + "\n";
+					gmCode += ln;
 				}
-				
+				games.add(new Game(gmCode.split("\n")));
+				gmCode = "";
 			}
+			
 			input.close();
+			if (oneOnly)
+				return ;
 		}
-		//System.out.println(players.get("gomec002"));
-		printPlayers(players);
-		//printTeams(teams);
+		statTeams();
+		printPlayers(allPlayers, 10);
+		System.out.println();
+		printTeams(allTeams);
 		
 
 		
 	}
-	
+	public static void statTeams(){
+		for(team t : allTeams.values())
+			t.update_stats();
+	}
 	public static void printPlayers(Map <String, player> m, int limit){
 		Collection <player> c = m.values();
 		List <player> l = new ArrayList<player>(c);
