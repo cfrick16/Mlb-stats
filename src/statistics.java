@@ -12,6 +12,9 @@ public class statistics implements Comparable<statistics>{
 	int walks;
 	int sac;
 	int ab;
+	
+	int out_holder;
+	
 	boolean doPrint;
 	
 	
@@ -54,9 +57,14 @@ public class statistics implements Comparable<statistics>{
 			System.out.println(x);
 	}
 	
+	public void doPrint(boolean bool){
+		doPrint = bool;
+	}
+	
 	//Parses fullPlay and calls the corresponding methods to update stats
 	//Returns runs scored on the play
 	public int update_stats(String fullPlay){
+		out_holder = 0;
 		//Splitting up fullPlay
 		int slash = fullPlay.indexOf("/");
 		int period = fullPlay.indexOf(".");
@@ -83,30 +91,44 @@ public class statistics implements Comparable<statistics>{
 		//So mods is not needed
 		int homer = 0;
 		if(advance.equals(""))
-			homer = parse_play(play, new String[0]);
+			homer = parse_play(play, new String[0],advances);
 		else
-			homer = parse_play(play, mods);
+			homer = parse_play(play, mods, advances);
 		
+		for(String x : mods)
+			if(x.contains("DP")){
+				out_holder = 2;
+			}
 		int rs =  runs_scored(advances) + homer;
-		//if(rs > 0)
-			//System.out.println(fullPlay + " \n" + rs + "\n");
+		//THIS JUST WORKS
+		if(rs>=100){
+			rs -= 100;
+			rs -= homer;
+		}
+		print(fullPlay + "  " + out_holder);
 		return rs;
 	}
 	
 	//Parses the play and decides if it was hit single...
-	private int parse_play(String play, String [] mods){
-		int homer = 0;
+	private int parse_play(String play, String [] mods, String [] advances){
+		int homer = 0; //Homer or stolen home
+
 		if(stringEquals("SB DI", play)){
 			//Stolen base: attempted to throw out or no attempt
+			if(stringEquals("SBH DIH", play))
+				homer++;
 		} else if(stringEquals("POCS PO", play)){
 			//Picked off at base POCS%, Caught stealing or putout
+			out_holder++;
 		
 		} else if(stringEquals("OA", play)){
 			//Out at base for some unknown reason
+			//out_holder++;
 		} else if(stringEquals("WP PB", play)){
 			//Wild pitch or passed ball
 		} else if(stringEquals("CS", play)){
 			//Caught stealing
+			out_holder++;
 		} else if(stringEquals("BK", play)){
 			//Balk
 		}
@@ -141,10 +163,11 @@ public class statistics implements Comparable<statistics>{
 			//No play
 		} else if(stringEquals("K", play)){
 			//Strikeout
-			pa++; ab++;
+			pa++; ab++; out_holder++;
 		} else if( stringEquals("1 2 3 4 5 6 7 8 9", play)){
 			//Out in field of play
-			pa++; ab++;
+			pa++; ab++; out_holder++;
+
 
 			for(String x : mods)
 				if(x.equals("SH") || x.equals("SF")){
@@ -156,11 +179,16 @@ public class statistics implements Comparable<statistics>{
 			System.out.println("Unknown play "+ play);
 		}
 
-
-		
+		//out_holder += Arrays.toString(advances).length() -
+			//	Arrays.toString(advances).replaceAll("X", "").length();
+		for(String x : advances)
+		{
+			out_holder += x.contains("X") && !x.contains("E") ? 1:0;
+		}
 		//Additional play, Recursive call
 		if(play.indexOf('+') < 3 && play.indexOf('+') > 0){
-			update_stats(play.substring(play.indexOf('+') + 1));
+			homer += parse_play(play.substring(play.indexOf('+') + 1), mods, new String[0]);
+
 		}
 		return homer;
 		
@@ -168,17 +196,18 @@ public class statistics implements Comparable<statistics>{
 	
 	private int runs_scored(String [] advances){
 
+
 		int count = 0;
 		for(String x : advances){
 			if(x.contains("-H"))
 				count++;
-//			if(x.matches("/-[23]"))//[(]*[0123456789]E/")){
-//				System.out.println("RAN");
-//				count++;
-//			}
+			if(x.matches(".*XH\\([0-9]*E.*") || x.matches(".*XH\\(.R.*"))
+				count++;
+			if(x.contains("B-H"))
+				count+=100;
+			//out_holder += x.contains("X") ? 1:0;
 		}
-		//if(count > 0)
-			//System.out.println(count + " " + Arrays.toString(advances));
+
 		return count;
 	}
 	

@@ -1,0 +1,148 @@
+Home: 2, Away: 2
+	Inning: 5.0
+		Odds of home team winning: 0.545 +- 0.0311
+		Trials: 88
+	Inning: 5.1
+		Odds of home team winning: 0.545 +- 0.0311
+		Trials: 88
+	Inning: 5.2
+		Odds of home team winning: 0.612 +- 0.0321
+		Trials: 85
+	Inning: 5.3
+		Odds of home team winning: 0.631 +- 0.0325
+		Trials: 84
+	Inning: 5.4
+		Odds of home team winning: 0.603 +- 0.0349
+		Trials: 78
+	Inning: 5.5
+		Odds of home team winning: 0.588 +- 0.0341
+		Trials: 80
+	Inning: 6.0
+		Odds of home team winning: 0.595 +- 0.0367
+		Trials: 74
+	Inning: 6.1
+		Odds of home team winning: 0.580 +- 0.0337
+		Trials: 81
+	Inning: 6.2
+		Odds of home team winning: 0.560 +- 0.0363
+		Trials: 75
+	Inning: 6.3
+		Odds of home team winning: 0.605 +- 0.0337
+		Trials: 81
+	Inning: 6.4
+		Odds of home team winning: 0.590 +- 0.0329
+		Trials: 83
+	Inning: 6.5
+		Odds of home team winning: 0.579 +- 0.0358
+		Trials: 76
+Home: 2, Away: 3
+	Inning: 5.0
+		Odds of home team winning: 0.377 +- 0.0393
+		Trials: 69
+	Inning: 5.1
+		Odds of home team winning: 0.347 +- 0.0377
+		Trials: 72
+	Inning: 5.2
+		Odds of home team winning: 0.329 +- 0.0372
+		Trials: 73
+	Inning: 5.3
+		Odds of home team winning: 0.429 +- 0.0387
+		Trials: 70
+	Inning: 5.4
+		Odds of home team winning: 0.379 +- 0.0410
+		Trials: 66
+	Inning: 5.5
+		Odds of home team winning: 0.366 +- 0.0382
+		Trials: 71
+	Inning: 6.0
+		Odds of home team winning: 0.313 +- 0.0404
+		Trials: 67
+	Inning: 6.1
+		Odds of home team winning: 0.342 +- 0.0372
+		Trials: 73
+	Inning: 6.2
+		Odds of home team winning: 0.394 +- 0.0382
+		Trials: 71
+	Inning: 6.3
+		Odds of home team winning: 0.460 +- 0.0428
+		Trials: 63
+	Inning: 6.4
+		Odds of home team winning: 0.419 +- 0.0435
+		Trials: 62
+	Inning: 6.5
+		Odds of home team winning: 0.452 +- 0.0435
+		Trials: 62
+Home: 3, Away: 2
+	Inning: 5.0
+		Odds of home team winning: 0.588 +- 0.0341
+		Trials: 80
+	Inning: 5.1
+		Odds of home team winning: 0.597 +- 0.0353
+		Trials: 77
+	Inning: 5.2
+		Odds of home team winning: 0.644 +- 0.0372
+		Trials: 73
+	Inning: 5.3
+		Odds of home team winning: 0.694 +- 0.0377
+		Trials: 72
+	Inning: 5.4
+		Odds of home team winning: 0.694 +- 0.0377
+		Trials: 72
+	Inning: 5.5
+		Odds of home team winning: 0.612 +- 0.0404
+		Trials: 67
+	Inning: 6.0
+		Odds of home team winning: 0.569 +- 0.0416
+		Trials: 65
+	Inning: 6.1
+		Odds of home team winning: 0.556 +- 0.0428
+		Trials: 63
+	Inning: 6.2
+		Odds of home team winning: 0.609 +- 0.0577
+		Trials: 46
+	Inning: 6.3
+		Odds of home team winning: 0.704 +- 0.0496
+		Trials: 54
+	Inning: 6.4
+		Odds of home team winning: 0.649 +- 0.0471
+		Trials: 57
+	Inning: 6.5
+		Odds of home team winning: 0.686 +- 0.0387
+		Trials: 70
+Home: 3, Away: 3
+	Inning: 5.0
+		Odds of home team winning: 0.545 +- 0.0311
+		Trials: 88
+	Inning: 5.1
+		Odds of home team winning: 0.545 +- 0.0311
+		Trials: 88
+	Inning: 5.2
+		Odds of home team winning: 0.612 +- 0.0321
+		Trials: 85
+	Inning: 5.3
+		Odds of home team winning: 0.631 +- 0.0325
+		Trials: 84
+	Inning: 5.4
+		Odds of home team winning: 0.603 +- 0.0349
+		Trials: 78
+	Inning: 5.5
+		Odds of home team winning: 0.588 +- 0.0341
+		Trials: 80
+	Inning: 6.0
+		Odds of home team winning: 0.595 +- 0.0367
+		Trials: 74
+	Inning: 6.1
+		Odds of home team winning: 0.580 +- 0.0337
+		Trials: 81
+	Inning: 6.2
+		Odds of home team winning: 0.560 +- 0.0363
+		Trials: 75
+	Inning: 6.3
+		Odds of home team winning: 0.605 +- 0.0337
+		Trials: 81
+	Inning: 6.4
+		Odds of home team winning: 0.590 +- 0.0329
+		Trials: 83
+	Inning: 6.5
+		Odds of home team winning: 0.579 +- 0.0358
+		Trials: 76

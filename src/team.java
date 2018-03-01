@@ -52,6 +52,10 @@ public class team implements Comparable<team>{
 		return t2.wins - wins;
 	}
 	
+	public boolean equals(team t2){
+		return teamName.equals(t2.getName());
+	}
+	
 	public String printPlayers(){
 		String ret = "";
 		Collections.sort(players);
